@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId    String @id @db.Char(40)
+  age Int
+  name String
+  email String
+  password String
+}
+
+model Receipt {
+  receiptId    String        @id @db.Char(40)
+  customerName String?       @db.VarChar(20)
+  date         BigInt
+  receiptItems ReceiptItem[]
+}
+
+model ReceiptItem {
+  receiptItemId String  @id @db.Char(40)
+  itemName      String  @db.Char(40)
+  itemPrice     Float
+  itemQuantity  Int
+  receipt       Receipt @relation(fields: [receiptId], references: [receiptId])
+  receiptId     String  @db.Char(40)
+}
