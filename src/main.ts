@@ -14,6 +14,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({
     whitelist:true,
+    // disableErrorMessages:true
   }))
   const config = new DocumentBuilder()
     .setTitle('Nest Learning')

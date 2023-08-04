@@ -19,6 +19,10 @@ export class UserService {
     return `This action returns a #${ids} users`;
   }
 
+  findUserByName(user:any) {
+    return `Perform actions on user ${user.username}`;
+  }
+
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
