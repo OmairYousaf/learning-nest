@@ -14,8 +14,8 @@ import { Receipt3Service } from './receipt3.service';
 import { CreateReceipt3Dto } from './dto/create-receipt3.dto';
 import { UpdateReceipt2Dto } from './dto/update-receipt3.dto';
 import { CreateRespEntity } from './entities/receipt2.entity';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { IsStringHavingValue } from './decorator/custom-decorator';
+import { ApiBody, ApiCreatedResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import { IsStringHavingValue, User } from './decorator/custom-decorator';
 
 @ApiTags('Receipts 3')
 @Controller('receipt3')
@@ -49,9 +49,9 @@ export class Receipt3Controller {
 
 
   @Post('addreceipt')
-  findUserByName(@Body() @IsStringHavingValue() username:any) {
-    console.log(username)
-    return this.receipt3Service.findUserByName(username)
+  findUserByName(@Body() @IsStringHavingValue() user:User) {
+    console.log(user)
+    return this.receipt3Service.findUserByName(user)
   }
 
  

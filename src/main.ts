@@ -13,7 +13,7 @@ async function bootstrap() {
   // app.useGlobalInterceptors(transformBigIntToString);
 
   app.useGlobalPipes(new ValidationPipe({
-    whitelist:true,
+    // whitelist:true,
     // disableErrorMessages:true
   }))
   const config = new DocumentBuilder()

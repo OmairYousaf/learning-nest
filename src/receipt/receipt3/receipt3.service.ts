@@ -6,6 +6,7 @@ import { createReceipt } from '../receipt1/receipt1';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { randomUUID } from 'crypto';
 import { Prisma } from '@prisma/client';
+import { User } from './decorator/custom-decorator';
 
 @Injectable()
 export class Receipt3Service {
@@ -27,7 +28,7 @@ export class Receipt3Service {
     return `This action returns a #${ids} receipts`;
   }
 
-  findUserByName(user:any) {
+  findUserByName(user:User) {
     return `Perform actions on receipt ${user.username}`;
   }
 
