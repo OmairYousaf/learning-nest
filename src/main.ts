@@ -13,8 +13,9 @@ async function bootstrap() {
   // app.useGlobalInterceptors(transformBigIntToString);
 
   app.useGlobalPipes(new ValidationPipe({
-    // whitelist:true,
-    // disableErrorMessages:true
+    // transform: true,
+    whitelist: true,
+    // forbidNonWhitelisted: true,
   }))
   const config = new DocumentBuilder()
     .setTitle('Nest Learning')

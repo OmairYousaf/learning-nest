@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsIn, IsInt, IsString } from 'class-validator';
+import { IsIn, IsInt, IsNumber, IsString } from 'class-validator';
 class ReceiptItem {
   @ApiProperty({
     description: 'Item name',
@@ -25,6 +25,7 @@ class ReceiptItem {
 
 export class CreateReceipt3Dto {
   @ApiProperty({
+    required:true,
     description: 'Customer Name',
     example: 'Barak Obama',
   })
@@ -32,10 +33,11 @@ export class CreateReceipt3Dto {
   customerName: string;
 
   @ApiProperty({
+    required:true,
     description: 'Date',
     example: 4423221,
   })
-  
+  @IsNumber()
   date: bigint;
 
   @ApiProperty({ type: ReceiptItem, isArray: true })

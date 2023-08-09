@@ -12,10 +12,10 @@ import {
 } from '@nestjs/common';
 import { Receipt3Service } from './receipt3.service';
 import { CreateReceipt3Dto } from './dto/create-receipt3.dto';
-import { UpdateReceipt2Dto } from './dto/update-receipt3.dto';
+import {  UpdateReceipt3Dto } from './dto/update-receipt3.dto';
 import { CreateRespEntity } from './entities/receipt2.entity';
 import { ApiBody, ApiCreatedResponse, ApiParam, ApiTags } from '@nestjs/swagger';
-import { IsStringHavingValue, User } from './decorator/custom-decorator';
+import { IsStringHavingValue } from './decorator/custom-decorator';
 
 @ApiTags('Receipts 3')
 @Controller('receipt3')
@@ -27,6 +27,7 @@ export class Receipt3Controller {
   create(
     @Body() createReceipt3Dto: CreateReceipt3Dto,
   ) {
+    console.log(createReceipt3Dto)
     return this.receipt3Service.create(createReceipt3Dto);
   }
 
@@ -35,6 +36,11 @@ export class Receipt3Controller {
   findAll() {
     return this.receipt3Service.findAll();
   }
+
+  // @Get()
+  // find() {
+  //   return this.receipt3Service.find();
+  // }
 
   @Get('getonly/:id')
   findOne(@Param('id',new ParseIntPipe()) id: number) {
@@ -49,11 +55,19 @@ export class Receipt3Controller {
 
 
   @Post('addreceipt')
-  findUserByName(@Body() @IsStringHavingValue() user:User) {
+  findUserByName(@Body() @IsStringHavingValue() user:any) {
     console.log(user)
     return this.receipt3Service.findUserByName(user)
   }
 
+
+  @Patch(':id')
+  createall(
+    @Param('id') id:string,
+    @Body() createReceipt3Dto: UpdateReceipt3Dto,
+  ) {
+    return 'this.receipt3Service.create(createReceipt3Dto);'
+  }
  
 
 }

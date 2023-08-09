@@ -26,10 +26,10 @@ export class Receipt2Controller {
     return this.receipt2Service.create(createReceipt2Dto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.receipt2Service.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.receipt2Service.findAll();
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {

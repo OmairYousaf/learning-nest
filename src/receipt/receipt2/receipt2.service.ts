@@ -10,7 +10,6 @@ import { Prisma } from '@prisma/client';
 @Injectable()
 export class Receipt2Service {
   constructor(private prisma: PrismaService) {}
-
   async create(createReceipt2Dto: CreateReceipt2Dto) {
     console.log('from service....',createReceipt2Dto);
 

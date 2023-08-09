@@ -11,10 +11,10 @@ datasource db {
 }
 
 model User {
-  userId    String @id @db.Char(40)
-  age Int
-  name String
-  email String
+  userId   String @id @db.Char(40)
+  age      Int
+  name     String
+  email    String
   password String
 }
 
