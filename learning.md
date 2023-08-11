@@ -298,3 +298,120 @@ prisma migrate reset
 <p align="center">
  <img src="./images/sql-commands.png" width="850" height="300" alt="Nest Logo" /></a>
 </p>
+
+# Configuration:
+
+Applications often run in different environments. Depending on the environment, different configuration settings should be used.
+
+## Installation:
+
+```bash
+## To begin using it, we first install the required dependency.
+$ npm i --save @nestjs/config
+```
+
+```
+HINT
+The @nestjs/config package internally uses dotenv.
+```
+
+In app level module We can import ConfigModule like below:
+
+```
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+
+@Module({
+  imports: [ConfigModule.forRoot()],
+})
+export class AppModule {}
+```
+
+```bash
+HINT
+The above code will load and parse .env file from root directory and assigned it to process.env, and store the result in a private structure that you can access through the ConfigService. The forRoot() method registers the ConfigService provider, which provides a get() method for reading these parsed/merged configuration variables.
+```
+
+## Custom env file path:
+
+```bash
+ConfigModule.forRoot({
+  envFilePath: '.env.conf',
+});
+
+## For multiple environment files
+ConfigModule.forRoot({
+  envFilePath: ['.env.development.local', '.env.development'],
+});
+```
+
+## Disable env variables loading:
+
+```
+ConfigModule.forRoot({
+  ignoreEnvFile: true,
+});
+```
+
+## Use Module Globally:
+
+```
+ConfigModule.forRoot({
+  isGlobal: true,
+});
+```
+
+## Using the ConfigService:
+
+```bash
+## First import the module in which we want to access
+
+@Module({
+  imports: [ConfigModule],
+  // ...
+})
+## After that get it  using standard constructor injection:
+constructor(private configService: ConfigService) {}
+```
+
+Now get variable by using
+
+```
+// get an environment variable
+const dbUser = this.configService.get<string>('DATABASE_USER');
+```
+
+The get() method also takes an optional second argument defining a default value, which will be returned when the key doesn't exist, as shown below:
+
+```
+// use "localhost" when "database.host" is not defined
+const dbHost = this.configService.get<string>('database.host', 'localhost');
+```
+
+## Partial Registration:
+
+Thus far, we've processed configuration files in our root module (e.g., AppModule), with the forRoot() method. Perhaps you have a more complex project structure, with feature-specific configuration files located in multiple different directories. Rather than load all these files in the root module, the @nestjs/config package provides a feature called partial registration,
+
+```
+import databaseConfig from './config/database.config';
+
+@Module({
+  imports: [ConfigModule.forFeature(databaseConfig)],
+})
+export class DatabaseModule {}
+```
+
+## Using the main.ts:
+
+While our config is a stored in a service, it can still be used in the main.ts
+
+To access it, you must use the app.get() method, followed by the service reference:
+
+```
+const configService = app.get(ConfigService);
+```
+
+```bash
+## You can then use it as usual, by calling the get method with the configuration key:
+const port = configService.get('PORT');
+```

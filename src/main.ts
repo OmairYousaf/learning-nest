@@ -10,10 +10,11 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix(`${process.env.URL_PREFIX}`)
   // app.useGlobalInterceptors(transformBigIntToString);
 
   app.useGlobalPipes(new ValidationPipe({
-    // transform: true,
+    transform: true,
     whitelist: true,
     // forbidNonWhitelisted: true,
   }))
@@ -24,7 +25,9 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, document);
-  await app.listen(3000);
+  SwaggerModule.setup( `${process.env.URL_PREFIX?? 'learning'}/swagger`, app, document,{swaggerOptions:{displayRequestDuration:true}});
+  console.log(process.env.DB)
+  console.log(process.env.db)
+  await app.listen(3002);
 }
 bootstrap();

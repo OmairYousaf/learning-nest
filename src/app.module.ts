@@ -7,9 +7,14 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { Receipt3Controller } from './receipt/receipt3/receipt3.controller';
 import { Receipt3Service } from './receipt/receipt3/receipt3.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [PrismaModule, UserModule],
+  imports: [PrismaModule, UserModule,ConfigModule.forRoot({
+    envFilePath:'.env.conf',
+    // ignoreEnvFile:true,
+    // isGlobal: true,
+  })],
   controllers: [AppController, Receipt2Controller,Receipt3Controller],
   providers: [AppService, Receipt2Service,Receipt3Service],
 })

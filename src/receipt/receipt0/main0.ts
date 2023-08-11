@@ -5,6 +5,7 @@ import { createReceipt } from "./receipt0";
 const prisma = new PrismaClient();
 
 async function seed() {
+ 
   const prisma = new PrismaClient();
   let index = 44;
   let data: Prisma.ReceiptUncheckedCreateInput = {
@@ -48,3 +49,5 @@ async function seed() {
 }
 
 seed();
+
+
