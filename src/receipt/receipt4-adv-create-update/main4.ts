@@ -1,18 +1,14 @@
 // seed.ts
 
 import { PrismaClient, Prisma } from '@prisma/client';
-import { createReceipt } from './receipt1';
-// import { CreateReceiptDto } from './dto/createReceiptDto';
-import { UpdateReceiptDto } from './dto/updateReceiptDto';
-async function create() {
-  const prisma = new PrismaClient({
-    // log: ['query'],
-  });
+import { createPrisma, updatePrisma } from './receipt_service';
+import { CreateReceiptDto, UpdateReceiptDto } from './dto/updateReceiptDto';
 
-  const receiptData = {
+function create() {
+  const receiptData: CreateReceiptDto = {
     receiptId: 'your-receipt-id', // Some unique id for the receipt
     customerName: 'John Doe',
-    date: Date.now(), // or any other BigInt value
+    date: BigInt(Date.now()), // or any other BigInt value
     receiptItems: {
       create: [
         {
@@ -42,27 +38,10 @@ async function create() {
       ],
     },
   };
-
-  const newReceipt = await prisma.receipt.create({
-    data: receiptData,
-  });
-  console.log('Data seeded successfully.');
+  return receiptData;
 }
 
-async function updatePrisma(id: string, updateReceiptDto: UpdateReceiptDto) {
-  const prisma = new PrismaClient({
-    // log: ['query'],
-  });
-
-  const updatedReceipt = await prisma.receipt.update({
-    where: {
-      receiptId: id,
-    },
-    data: updateReceiptDto,
-  });
-}
-
-async function update() {
+function update() {
   const prisma = new PrismaClient({
     // log: ['query'],
   });
@@ -103,13 +82,18 @@ async function update() {
       ],
     },
   };
-  // let { receiptId, ...data1 } = data;
-  await updatePrisma(receiptIdToUpdate, data);
+  return { id: receiptIdToUpdate, data: data };
 }
 
 async function main() {
-  // await create();
-  await update();
+  const prisma = new PrismaClient({
+    // log: ['query'],
+  });
+  let createRes: CreateReceiptDto = create();
+  await createPrisma(prisma, createRes);
+
+  let updateRes: { id: string; data: UpdateReceiptDto } = update();
+  await updatePrisma(prisma, updateRes.id, updateRes.data);
 }
 
 main();
