@@ -90,8 +90,8 @@ async function main() {
   const prisma = new PrismaClient({
     // log: ['query'],
   });
-  let createRes: CreateReceiptDto = create();
-  await createPrisma(prisma, createRes);
+  // let createRes: CreateReceiptDto = create();
+  // await createPrisma(prisma, createRes);
 
   let updateRes: { id: string; data: UpdateReceiptDto } = update();
   await updatePrisma(prisma, updateRes.id, updateRes.data);
