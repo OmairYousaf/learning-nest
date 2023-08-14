@@ -1,8 +1,4 @@
-import { CreateReceiptItemDto } from './createReceiptItemDto';
-
-class ReceiptItemCreateDict {
-  create: CreateReceiptItemDto[]; //create should have this
-}
+import { ReceiptItemCreateDict } from './createReceiptItemDto';
 
 export class CreateReceiptDto {
   receiptId: string;

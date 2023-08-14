@@ -7,34 +7,82 @@ import { UpdateReceiptDto } from './dto/updateReceiptDto';
 
 function create() {
   const receiptData: CreateReceiptDto = {
-    receiptId: 'your-receipt-id', // Some unique id for the receipt
+    receiptId: 'some-id-1',
     customerName: 'John Doe',
-    date: BigInt(Date.now()), // or any other BigInt value
+    date: BigInt(Date.now()),
     receiptItems: {
       create: [
         {
-          receiptItemId: 'item1-id', // Some unique id for the receipt item
-          itemName: 'Item 1 Name',
-          itemPrice: 10.5,
-          itemQuantity: 2,
-        },
-        {
-          receiptItemId: 'item2-id', // Another unique id for the receipt item
-          itemName: 'Item 2 Name',
-          itemPrice: 15.75,
+          receiptItemId: 'item-id-1',
+          itemName: 'Item 1',
+          itemPrice: 10.0,
           itemQuantity: 1,
         },
         {
-          receiptItemId: 'item3-id', // Another unique id for the receipt item
-          itemName: 'Item 3 Name',
-          itemPrice: 5.25,
+          receiptItemId: 'item-id-2',
+          itemName: 'Item 2',
+          itemPrice: 20.0,
+          itemQuantity: 2,
+          ItemInspection: {
+            create: [
+              {
+                itemInspectionId: 'inspection-id-1',
+                date: BigInt(Date.now()),
+                comments: 'Good',
+              },
+              {
+                itemInspectionId: 'inspection-id-2',
+                date: BigInt(Date.now()),
+                comments: 'Fair',
+              },
+              {
+                itemInspectionId: 'inspection-id-3',
+                date: BigInt(Date.now()),
+                comments: 'Excellent',
+                InspectBy: {
+                  create: [
+                    {
+                      inspectById: 'inspectby-id-1',
+                      name: 'Inspector 1',
+                      age: 30,
+                    },
+                    {
+                      inspectById: 'inspectby-id-2',
+                      name: 'Inspector 2',
+                      age: 32,
+                    },
+                    {
+                      inspectById: 'inspectby-id-3',
+                      name: 'Inspector 3',
+                      age: 28,
+                    },
+                    {
+                      inspectById: 'inspectby-id-4',
+                      name: 'Inspector 4',
+                      age: 35,
+                    },
+                  ],
+                },
+              },
+              {
+                itemInspectionId: 'inspection-id-4',
+                date: BigInt(Date.now()),
+                comments: 'Poor',
+              },
+            ],
+          },
+        },
+        {
+          receiptItemId: 'item-id-3',
+          itemName: 'Item 3',
+          itemPrice: 30.0,
           itemQuantity: 3,
         },
         {
-          receiptItemId: 'item4-id', // Another unique id for the receipt item
-          itemName: 'Item 4 Name',
-          itemPrice: 20.0,
-          itemQuantity: 1,
+          receiptItemId: 'item-id-4',
+          itemName: 'Item 4',
+          itemPrice: 40.0,
+          itemQuantity: 4,
         },
       ],
     },
@@ -93,8 +141,8 @@ async function main() {
   let createRes: CreateReceiptDto = create();
   await createPrisma(prisma, createRes);
 
-  let updateRes: { id: string; data: UpdateReceiptDto } = update();
-  await updatePrisma(prisma, updateRes.id, updateRes.data);
+  // let updateRes: { id: string; data: UpdateReceiptDto } = update();
+  // await updatePrisma(prisma, updateRes.id, updateRes.data);
 }
 
 main();
