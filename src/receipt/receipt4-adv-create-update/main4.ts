@@ -2,7 +2,8 @@
 
 import { PrismaClient, Prisma } from '@prisma/client';
 import { createPrisma, updatePrisma } from './receipt_service';
-import { CreateReceiptDto, UpdateReceiptDto } from './dto/updateReceiptDto';
+import { CreateReceiptDto } from './dto/createReceiptDto';
+import { UpdateReceiptDto } from './dto/updateReceiptDto';
 
 function create() {
   const receiptData: CreateReceiptDto = {

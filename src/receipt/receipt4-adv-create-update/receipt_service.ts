@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { CreateReceiptDto, UpdateReceiptDto } from './dto/updateReceiptDto';
+import { CreateReceiptDto } from './dto/createReceiptDto';
+import { UpdateReceiptDto } from './dto/updateReceiptDto';
 
 export async function updatePrisma(
   prisma: PrismaClient,

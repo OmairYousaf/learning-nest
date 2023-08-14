@@ -1,11 +1,5 @@
 import { OmitType, PartialType } from '@nestjs/swagger';
-
-class CreateReceiptItemDto {
-  receiptItemId: string;
-  itemName: string;
-  itemPrice: number;
-  itemQuantity: number;
-}
+import { CreateReceiptItemDto, CreateReceiptDto } from './createReceiptDto';
 
 class UpdateReceiptItemDto extends PartialType(
   OmitType(CreateReceiptItemDto, ['receiptItemId']),
@@ -20,27 +14,14 @@ class UpdateReceiptItemWhereDto {
   data: UpdateReceiptItemDto;
 }
 
-export class CreateReceiptDto {
-  receiptId: string;
-  customerName: string;
-  date: bigint;
-  receiptItems: {
-    create?: CreateReceiptItemDto[]; //create should have this
-    updateMany?: UpdateReceiptItemWhereDto[];
-    deleteMany?: ReceiptItemIdDto[];
-  };
+class ReceiptItemUpdateDict {
+  create?: CreateReceiptItemDto[]; //create should have this
+  updateMany?: UpdateReceiptItemWhereDto[];
+  deleteMany?: ReceiptItemIdDto[];
 }
 
-// export class UpdateReceiptDto {
-//   customerName?: string;
-//   date?: bigint;
-//   receiptItems?: {
-//     create: CreateReceiptItemDto[];
-//     updateMany: UpdateReceiptItemWhereDto[];
-//     deleteMany: ReceiptItemIdDto[];
-//   };
-// }
-
 export class UpdateReceiptDto extends PartialType(
-  OmitType(CreateReceiptDto, ['receiptId']),
-) {}
+  OmitType(CreateReceiptDto, ['receiptId', 'receiptItems']),
+) {
+  receiptItems: ReceiptItemUpdateDict;
+}
