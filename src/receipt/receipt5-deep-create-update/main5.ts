@@ -23,7 +23,7 @@ function create() {
           itemName: 'Item 2',
           itemPrice: 20.0,
           itemQuantity: 2,
-          ItemInspection: {
+          itemInspections: {
             create: [
               {
                 itemInspectionId: 'inspection-id-1',
@@ -39,7 +39,7 @@ function create() {
                 itemInspectionId: 'inspection-id-3',
                 date: BigInt(Date.now()),
                 comments: 'Excellent',
-                InspectBy: {
+                inspectBys: {
                   create: [
                     {
                       inspectById: 'inspectby-id-1',

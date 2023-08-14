@@ -19,7 +19,7 @@ async function main() {
             where: { receiptItemId: 'item-id-2' },
             data: {
               itemPrice: 80.0,
-              ItemInspection: {
+              itemInspections: {
                 deleteMany: [
                   { itemInspectionId: 'inspection-id-1' },
                   { itemInspectionId: 'inspection-id-2' },
@@ -29,7 +29,7 @@ async function main() {
                     where: { itemInspectionId: 'inspection-id-3' },
                     data: {
                       comments: 'Very Bad',
-                      InspectBy: {
+                      inspectBys: {
                         delete: { inspectById: 'inspectby-id-3' },
                         update: {
                           where: { inspectById: 'inspectby-id-2' },
@@ -41,7 +41,7 @@ async function main() {
                   {
                     where: { itemInspectionId: 'inspection-id-4' },
                     data: {
-                      InspectBy: {
+                      inspectBys: {
                         create: {
                           inspectById: 'new-inspectby-id',
                           name: 'New Inspector',
@@ -56,7 +56,7 @@ async function main() {
                     itemInspectionId: 'new-inspection-id-1',
                     date: BigInt(Date.now()),
                     comments: 'New Comment 1',
-                    InspectBy: {
+                    inspectBys: {
                       create: [
                         {
                           inspectById: 'new-inspectby-id-1',
@@ -75,7 +75,7 @@ async function main() {
                     itemInspectionId: 'new-inspection-id-2',
                     date: BigInt(Date.now()),
                     comments: 'New Comment 2',
-                    InspectBy: {
+                    inspectBys: {
                       create: [
                         {
                           inspectById: 'new-inspectby-id-3',

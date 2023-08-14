@@ -4,7 +4,7 @@ export class CreateItemInspectionDto {
   itemInspectionId: string;
   date: bigint;
   comments: string;
-  InspectBy?: InspectedByCreateDict;
+  inspectBys?: InspectedByCreateDict;
 }
 
 export class ItemInspectionCreateDict {

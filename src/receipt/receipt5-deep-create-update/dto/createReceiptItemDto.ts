@@ -5,7 +5,7 @@ export class CreateReceiptItemDto {
   itemName: string;
   itemPrice: number;
   itemQuantity: number;
-  ItemInspection?: ItemInspectionCreateDict;
+  itemInspections?: ItemInspectionCreateDict;
 }
 
 export class ReceiptItemCreateDict {
