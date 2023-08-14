@@ -1,9 +1,6 @@
 // seed.ts
 
 import { PrismaClient, Prisma } from '@prisma/client';
-// import { createPrisma, updatePrisma } from './receipt_service';
-// import { CreateReceiptDto } from './dto/createReceiptDto';
-// import { UpdateReceiptDto } from './dto/updateReceiptDto';
 
 async function main() {
   const prisma = new PrismaClient({

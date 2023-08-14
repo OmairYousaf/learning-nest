@@ -98,35 +98,99 @@ function update() {
   const receiptIdToUpdate = 'your-receipt-id'; // Replace with your actual receiptId
 
   let data: UpdateReceiptDto = {
-    // receiptId: '1234',
-    customerName: 'bilal turi',
     receiptItems: {
-      deleteMany: [
-        { receiptItemId: 'item1-id' },
-        { receiptItemId: 'item2-id' },
-      ],
+      deleteMany: [{ receiptItemId: 'item-id-1' }],
       updateMany: [
         {
-          where: { receiptItemId: 'item3-id' },
-          data: { itemPrice: 99 }, // Replace with your new price
-        },
-        {
-          where: { receiptItemId: 'item4-id' },
-          data: { itemPrice: 199 }, // Replace with your new price
+          where: { receiptItemId: 'item-id-2' },
+          data: {
+            itemPrice: 80.0,
+            itemInspections: {
+              deleteMany: [
+                { itemInspectionId: 'inspection-id-1' },
+                { itemInspectionId: 'inspection-id-2' },
+              ],
+              updateMany: [
+                {
+                  where: { itemInspectionId: 'inspection-id-3' },
+                  data: {
+                    comments: 'Very Bad',
+                    inspectBys: {
+                      deleteMany: [{ inspectById: 'inspectby-id-3' }],
+                      updateMany: [
+                        {
+                          where: { inspectById: 'inspectby-id-2' },
+                          data: { age: 80 },
+                        },
+                      ],
+                    },
+                  },
+                },
+                {
+                  where: { itemInspectionId: 'inspection-id-4' },
+                  data: {
+                    inspectBys: {
+                      create: [
+                        {
+                          inspectById: 'new-inspectby-id',
+                          name: 'New Inspector',
+                          age: 25,
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+              create: [
+                {
+                  itemInspectionId: 'new-inspection-id-1',
+                  date: BigInt(Date.now()),
+                  comments: 'New Comment 1',
+                  inspectBys: {
+                    create: [
+                      {
+                        inspectById: 'new-inspectby-id-1',
+                        name: 'Inspector A',
+                        age: 40,
+                      },
+                      {
+                        inspectById: 'new-inspectby-id-2',
+                        name: 'Inspector B',
+                        age: 45,
+                      },
+                    ],
+                  },
+                },
+                {
+                  itemInspectionId: 'new-inspection-id-2',
+                  date: BigInt(Date.now()),
+                  comments: 'New Comment 2',
+                  inspectBys: {
+                    create: [
+                      {
+                        inspectById: 'new-inspectby-id-3',
+                        name: 'Inspector C',
+                        age: 50,
+                      },
+                      {
+                        inspectById: 'new-inspectby-id-4',
+                        name: 'Inspector D',
+                        age: 55,
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
         },
       ],
       create: [
         {
-          receiptItemId: 'item5-id',
-          itemName: 'Item 5 Name',
-          itemPrice: 25.0,
-          itemQuantity: 2,
-        },
-        {
-          receiptItemId: 'item6-id',
-          itemName: 'Item 6 Name',
-          itemPrice: 30.0,
-          itemQuantity: 1,
+          receiptItemId: 'item-id-100',
+          itemName: 'Item 100',
+          itemPrice: 100.0,
+          itemQuantity: 100,
         },
       ],
     },
@@ -138,11 +202,11 @@ async function main() {
   const prisma = new PrismaClient({
     // log: ['query'],
   });
-  let createRes: CreateReceiptDto = create();
-  await createPrisma(prisma, createRes);
+  // let createRes: CreateReceiptDto = create();
+  // await createPrisma(prisma, createRes);
 
-  // let updateRes: { id: string; data: UpdateReceiptDto } = update();
-  // await updatePrisma(prisma, updateRes.id, updateRes.data);
+  let updateRes: { id: string; data: UpdateReceiptDto } = update();
+  await updatePrisma(prisma, updateRes.id, updateRes.data);
 }
 
 main();
