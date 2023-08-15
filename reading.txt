@@ -10,8 +10,8 @@
 
 2 Prisma Migrations
 
-- Migrations                                      8/8/2023
-- Raw Query                                        9/8/2023
+- Migrations                                        8/8/2023
+- Raw Query                                         9/8/2023
 - Commands                                          9/8/2023
 - 2 Data Bases                                      9/8/2023
 
@@ -19,7 +19,6 @@
 
 - Relations                                         10/8/2023
 - Understanding                                     10/8/2023
-
 
 4 Git Commands
 
@@ -34,7 +33,6 @@
 - Docker                                            12/8/2023
 - System Understanding                              12/8/2023
 
-
 6 Nest Guards
 
 - Permissions                                       13/8/2023
@@ -42,3 +40,5 @@
 - Login                                             15/8/2023
 - Role                                              15/8/2023
 - Custom Guard                                      17/8/2023
+
+7 Multi-Tenant

@@ -53,11 +53,8 @@ function update() {
     // receiptId: '1234',
     customerName: 'bilal turi',
     receiptItems: {
-      deleteMany: [
-        { receiptItemId: 'item1-id' },
-        { receiptItemId: 'item2-id' },
-      ],
-      updateMany: [
+      delete: [{ receiptItemId: 'item1-id' }, { receiptItemId: 'item2-id' }],
+      update: [
         {
           where: { receiptItemId: 'item3-id' },
           data: { itemPrice: 99 }, // Replace with your new price
