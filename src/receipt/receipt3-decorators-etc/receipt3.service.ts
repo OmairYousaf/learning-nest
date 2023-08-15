@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateReceipt3Dto } from './dto/create-receipt3.dto';
-import { createReceipt } from '../receipt1/receipt1';
+// import { createReceipt } from '../receipt1/receipt1';
 // import { PrismaClient } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { randomUUID } from 'crypto';
@@ -14,7 +14,6 @@ export class Receipt3Service {
     return 'This action adds a new receipt';
   }
 
- 
   findAll() {
     return `This action returns all receipts find all`;
   }
@@ -29,10 +28,7 @@ export class Receipt3Service {
     return `This action returns a #${ids} receipts`;
   }
 
-  findUserByName(user:any) {
+  findUserByName(user: any) {
     return `Perform actions on receipt ${user.username}`;
   }
-
-
- 
 }

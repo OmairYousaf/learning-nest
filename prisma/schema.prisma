@@ -26,10 +26,28 @@ model Receipt {
 }
 
 model ReceiptItem {
-  receiptItemId String  @id @db.Char(40)
-  itemName      String  @db.Char(40)
-  itemPrice     Float
-  itemQuantity  Int
-  receipt       Receipt @relation(fields: [receiptId], references: [receiptId])
-  receiptId     String  @db.Char(40)
+  receiptItemId   String           @id @db.Char(40)
+  itemName        String           @db.Char(40)
+  itemPrice       Float
+  itemQuantity    Int
+  receipt         Receipt          @relation(fields: [receiptId], references: [receiptId])
+  receiptId       String           @db.Char(40)
+  itemInspections ItemInspection[]
+}
+
+model ItemInspection {
+  itemInspectionId String      @id @db.Char(40)
+  date             BigInt
+  comments         String      @db.Char(40)
+  receiptItem      ReceiptItem @relation(fields: [receiptItemId], references: [receiptItemId])
+  receiptItemId    String      @db.Char(40)
+  inspectBys       InspectBy[]
+}
+
+model InspectBy {
+  inspectById      String         @id @db.Char(40)
+  name             String         @db.Char(40)
+  age              Int
+  itemInspection   ItemInspection @relation(fields: [itemInspectionId], references: [itemInspectionId])
+  itemInspectionId String         @db.Char(40)
 }

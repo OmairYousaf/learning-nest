@@ -13,7 +13,7 @@ import { UpdateReceipt2Dto } from './dto/update-receipt2.dto';
 import { CreateRespEntity } from './entities/receipt2.entity';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Receipts')
+@ApiTags('Receipts 2')
 @Controller('receipt2')
 export class Receipt2Controller {
   constructor(private readonly receipt2Service: Receipt2Service) {}
