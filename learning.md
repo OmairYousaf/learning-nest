@@ -415,3 +415,88 @@ const configService = app.get(ConfigService);
 ## You can then use it as usual, by calling the get method with the configuration key:
 const port = configService.get('PORT');
 ```
+
+# Guards:
+
+A guard is a class annotated with the @Injectable() decorator, which implements the CanActivate interface.
+
+Basically it refers to the concept of authorization
+
+For Example
+I want to protect an endpoint by using custom Guard.
+
+i.e Only Admin type user can access this endpoint.
+
+## Role Based Authentication:
+
+```
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Observable } from 'rxjs';
+
+@Injectable()
+export class AuthGuard implements CanActivate {
+  canActivate(
+    context: ExecutionContext,
+  ): boolean | Promise<boolean> | Observable<boolean> {
+    const request = context.switchToHttp().getRequest();
+    return validateRequest(request);
+  }
+}
+```
+
+Every guard must implement a canActivate() function. This function should return a boolean, indicating whether the current request is allowed or not. It can return the response either synchronously or asynchronously (via a Promise or Observable). Nest uses the return value to control the next action.
+
+- if it returns true, the request will be processed.
+- if it returns false, Nest will deny the request.
+
+```ts
+HINT
+We can use
+@UseGuards(RolesGuard)
+Above, we passed the RolesGuard class (instead of an instance), leaving responsibility for instantiation to the framework and enabling dependency injection.
+OR
+@UseGuards(new RolesGuard())
+Can also use an instance, as above.
+```
+
+For similer to useGloblePipes we can also use guards as globally:
+
+```
+const app = await NestFactory.create(AppModule);
+app.useGlobalGuards(new RolesGuard());
+```
+
+Global guards are used across the whole application, for every controller and every route handler. In terms of dependency injection, global guards registered from outside of any module (with useGlobalGuards() as in the example above) cannot inject dependencies since this is done outside the context of any module. In order to solve this issue, you can set up a guard directly from any module using the following construction:
+
+```
+import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+
+@Module({
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
+})
+export class AppModule {}
+```
+
+```
+@SetMetadata('roles', ['admin']) is used for providing custom data to any route handler
+```
+
+With the construction above, we attached the roles metadata (roles is a key, while ['admin'] is a particular value) to the create() method. While this works, it's not good practice to use @SetMetadata() directly in your routes. Instead, create your own decorators, as shown below.
+
+```
+Create file roles.decorator.ts and place below code
+
+import { SetMetadata } from '@nestjs/common';
+
+export const Roles = (...roles: string[]) => SetMetadata('roles', roles);
+```
+
+Now use the following below instead of above.
+
+@Roles('admin')
