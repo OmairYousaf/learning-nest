@@ -10,8 +10,8 @@
 
 2 Prisma Migrations
 
-- Migrations                                      8/8/2023
-- Raw Query                                        9/8/2023
+- Migrations                                        8/8/2023
+- Raw Query                                         9/8/2023
 - Commands                                          9/8/2023
 - 2 Data Bases                                      9/8/2023
 
