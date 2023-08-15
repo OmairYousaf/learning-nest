@@ -10,7 +10,7 @@ async function main() {
     where: { receiptId: 'some-id-1' },
     data: {
       receiptItems: {
-        delete: { receiptItemId: 'item-id-1' },
+        delete: [{ receiptItemId: 'item-id-1' }],
         update: [
           {
             where: { receiptItemId: 'item-id-2' },
@@ -27,11 +27,13 @@ async function main() {
                     data: {
                       comments: 'Very Bad',
                       inspectBys: {
-                        delete: { inspectById: 'inspectby-id-3' },
-                        update: {
-                          where: { inspectById: 'inspectby-id-2' },
-                          data: { age: 80 },
-                        },
+                        deleteMany: [{ inspectById: 'inspectby-id-3' }],
+                        update: [
+                          {
+                            where: { inspectById: 'inspectby-id-2' },
+                            data: { age: 80 },
+                          },
+                        ],
                       },
                     },
                   },
@@ -39,11 +41,13 @@ async function main() {
                     where: { itemInspectionId: 'inspection-id-4' },
                     data: {
                       inspectBys: {
-                        create: {
-                          inspectById: 'new-inspectby-id',
-                          name: 'New Inspector',
-                          age: 25,
-                        },
+                        create: [
+                          {
+                            inspectById: 'new-inspectby-id',
+                            name: 'New Inspector',
+                            age: 25,
+                          },
+                        ],
                       },
                     },
                   },
