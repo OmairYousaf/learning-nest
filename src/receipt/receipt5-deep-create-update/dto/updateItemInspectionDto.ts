@@ -19,6 +19,6 @@ export class UpdateItemInspectionWhereDto {
 
 export class ItemInspectionUpdateDict {
   create?: CreateItemInspectionDto[];
-  updateMany?: UpdateItemInspectionWhereDto[];
-  deleteMany?: ItemInspectionIdDto[];
+  update?: UpdateItemInspectionWhereDto[];
+  delete?: ItemInspectionIdDto[];
 }

@@ -17,7 +17,7 @@ async function main() {
             data: {
               itemPrice: 80.0,
               itemInspections: {
-                deleteMany: [
+                delete: [
                   { itemInspectionId: 'inspection-id-1' },
                   { itemInspectionId: 'inspection-id-2' },
                 ],
@@ -27,7 +27,7 @@ async function main() {
                     data: {
                       comments: 'Very Bad',
                       inspectBys: {
-                        deleteMany: [{ inspectById: 'inspectby-id-3' }],
+                        delete: [{ inspectById: 'inspectby-id-3' }],
                         update: [
                           {
                             where: { inspectById: 'inspectby-id-2' },

@@ -25,6 +25,6 @@ export class UpdateReceiptItemWhereDto {
 
 export class ReceiptItemUpdateDict {
   create?: CreateReceiptItemDto[]; //create should have this
-  updateMany?: UpdateReceiptItemWhereDto[];
-  deleteMany?: ReceiptItemIdDto[];
+  update?: UpdateReceiptItemWhereDto[];
+  delete?: ReceiptItemIdDto[];
 }

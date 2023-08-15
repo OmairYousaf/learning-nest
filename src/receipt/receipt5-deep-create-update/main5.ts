@@ -95,29 +95,29 @@ function update() {
     // log: ['query'],
   });
 
-  const receiptIdToUpdate = 'your-receipt-id'; // Replace with your actual receiptId
+  const receiptIdToUpdate = 'some-id-1'; // Replace with your actual receiptId
 
   let data: UpdateReceiptDto = {
     receiptItems: {
-      deleteMany: [{ receiptItemId: 'item-id-1' }],
-      updateMany: [
+      delete: [{ receiptItemId: 'item-id-1' }],
+      update: [
         {
           where: { receiptItemId: 'item-id-2' },
           data: {
             itemPrice: 80.0,
             itemInspections: {
-              deleteMany: [
+              delete: [
                 { itemInspectionId: 'inspection-id-1' },
                 { itemInspectionId: 'inspection-id-2' },
               ],
-              updateMany: [
+              update: [
                 {
                   where: { itemInspectionId: 'inspection-id-3' },
                   data: {
                     comments: 'Very Bad',
                     inspectBys: {
-                      deleteMany: [{ inspectById: 'inspectby-id-3' }],
-                      updateMany: [
+                      delete: [{ inspectById: 'inspectby-id-3' }],
+                      update: [
                         {
                           where: { inspectById: 'inspectby-id-2' },
                           data: { age: 80 },
@@ -200,10 +200,15 @@ function update() {
 
 async function main() {
   const prisma = new PrismaClient({
-    // log: ['query'],
+    log: ['query'],
   });
-  // let createRes: CreateReceiptDto = create();
-  // await createPrisma(prisma, createRes);
+  await prisma.inspectBy.deleteMany();
+  await prisma.itemInspection.deleteMany();
+  await prisma.receiptItem.deleteMany();
+  await prisma.receipt.deleteMany();
+
+  let createRes: CreateReceiptDto = create();
+  await createPrisma(prisma, createRes);
 
   let updateRes: { id: string; data: UpdateReceiptDto } = update();
   await updatePrisma(prisma, updateRes.id, updateRes.data);

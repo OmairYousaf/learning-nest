@@ -16,6 +16,6 @@ export class UpdateInspectedByWhereDto {
 
 export class InspectedByUpdateDict {
   create?: CreateInspectedByDto[];
-  updateMany?: UpdateInspectedByWhereDto[];
-  deleteMany?: InspectedByIdDto[];
+  update?: UpdateInspectedByWhereDto[];
+  delete?: InspectedByIdDto[];
 }
