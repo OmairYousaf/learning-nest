@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Receipt2Controller } from './receipt/receipt2-basic-create-nestjs/receipt2.controller';
@@ -15,6 +15,8 @@ import { Receipt5Controller } from './receipt/receipt5-deep-create-update-nestjs
 import { Receipt5Service } from './receipt/receipt5-deep-create-update-nestjs/receipt5.service';
 
 import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guards/roles.guard';
 
 @Module({
   imports: [
@@ -26,6 +28,7 @@ import { ConfigModule } from '@nestjs/config';
       // ignoreEnvFile:true,
       // isGlobal: true,
     }),
+    ConfigModule.forRoot({isGlobal:true})
   ],
   controllers: [
     AppController,
@@ -42,4 +45,7 @@ import { ConfigModule } from '@nestjs/config';
     Receipt5Service,
   ],
 })
-export class AppModule {}
+export class AppModule {
+ 
+  
+}

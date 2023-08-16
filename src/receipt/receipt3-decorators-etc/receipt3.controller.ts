@@ -9,6 +9,8 @@ import {
   ParseIntPipe,
   Query,
   ParseArrayPipe,
+  UseGuards,
+  SetMetadata,
 } from '@nestjs/common';
 import { Receipt3Service } from './receipt3.service';
 import { CreateReceipt3Dto } from './dto/create-receipt3.dto';
@@ -16,6 +18,8 @@ import {  UpdateReceipt3Dto } from './dto/update-receipt3.dto';
 import { CreateRespEntity } from './entities/receipt2.entity';
 import { ApiBody, ApiCreatedResponse, ApiParam, ApiTags } from '@nestjs/swagger';
 import { IsStringHavingValue } from './decorator/custom-decorator';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/guards/roles.decorator';
 
 @ApiTags('Receipts 3')
 @Controller('receipt3')
@@ -32,7 +36,12 @@ export class Receipt3Controller {
   }
 
  
+
+  // @SetMetadata('roles',['admin'])
+ 
   @Get()
+  @UseGuards(RolesGuard)
+  @Roles('admin')
   findAll() {
     return this.receipt3Service.findAll();
   }

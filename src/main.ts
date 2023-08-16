@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { RolesGuard } from './guards/roles.guard';
 
 /** */
 (BigInt.prototype as any).toJSON = function () {
@@ -10,7 +11,13 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+<<<<<<< HEAD
   app.setGlobalPrefix(`${process.env.URL_PREFIX}`);
+=======
+  // app.useGlobalGuards(new RolesGuard())
+  app.setGlobalPrefix(`${process.env.URL_PREFIX}`)
+
+>>>>>>> 6da8dfe4e0b96132f549aa992f7bd05fac9d3ce9
   // app.useGlobalInterceptors(transformBigIntToString);
 
   app.useGlobalPipes(
