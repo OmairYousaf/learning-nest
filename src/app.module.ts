@@ -11,6 +11,9 @@ import { Receipt3Service } from './receipt/receipt3-decorators-etc/receipt3.serv
 import { Receipt4Controller } from './receipt/receipt4-adv-create-update-nestjs/receipt4.controller';
 import { Receipt4Service } from './receipt/receipt4-adv-create-update-nestjs/receipt4.service';
 
+import { Receipt5Controller } from './receipt/receipt5-deep-create-update-nestjs/receipt5.controller';
+import { Receipt5Service } from './receipt/receipt5-deep-create-update-nestjs/receipt5.service';
+
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -29,7 +32,14 @@ import { ConfigModule } from '@nestjs/config';
     Receipt2Controller,
     Receipt3Controller,
     Receipt4Controller,
+    Receipt5Controller,
   ],
-  providers: [AppService, Receipt2Service, Receipt3Service, Receipt4Service],
+  providers: [
+    AppService,
+    Receipt2Service,
+    Receipt3Service,
+    Receipt4Service,
+    Receipt5Service,
+  ],
 })
 export class AppModule {}
