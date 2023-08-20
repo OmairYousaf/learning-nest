@@ -1,0 +1,21 @@
+{
+  "name": "flatbuddy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Usama Ahmed Siddiquie <usiddique@cognitivehealthintl.com>",
+  "license": "MIT",
+  "scripts": {
+    "migrate:flatbuddy": "yarn prisma migrate dev --schema prisma/flatbuddy.prisma",
+    "start:flatbuddy": "ts-node src/flatbuddy/main.ts",
+    "start1": "npx tsc && node dist/index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "5.1.1",
+    "prisma": "^5.1.1",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.2"
+  }
+}

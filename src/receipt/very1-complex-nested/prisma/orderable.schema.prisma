@@ -1,0 +1,66 @@
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model ORDDoctor {
+    id        String         @id @default(uuid())
+    name      String
+    Orderable ORDOrderable[]
+}
+
+model ORDPatient {
+    id        String         @id @default(uuid())
+    name      String
+    Orderable ORDOrderable[]
+    Medicine  ORDMedicine[]
+}
+
+model ORDMedicine {
+    id        String     @id @default(uuid())
+    name      String
+    patient   ORDPatient @relation(fields: [patientId], references: [id])
+    patientId String
+}
+
+model ORDOrderable {
+    id         String          @id @default(uuid())
+    name       String
+    Resultable ORDResultable[]
+    Schedule   ORDSchedule[]
+    Device     ORDDevice[]
+
+    patient   ORDPatient @relation(fields: [patientId], references: [id])
+    patientId String
+
+    assignedBy   ORDDoctor @relation(fields: [assignedById], references: [id])
+    assignedById String
+}
+
+model ORDResultable {
+    id   String @id @default(uuid())
+    name String
+
+    orderable   ORDOrderable @relation(fields: [orderableId], references: [id])
+    orderableId String
+}
+
+model ORDSchedule {
+    id   String   @id @default(uuid())
+    time DateTime
+
+    orderable   ORDOrderable @relation(fields: [orderableId], references: [id])
+    orderableId String
+}
+
+model ORDDevice {
+    id    String @id @default(uuid())
+    model String
+
+    orderable   ORDOrderable @relation(fields: [orderableId], references: [id])
+    orderableId String
+}

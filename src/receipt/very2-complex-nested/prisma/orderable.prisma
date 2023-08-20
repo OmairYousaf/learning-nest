@@ -1,0 +1,66 @@
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Doctor {
+    id        String      @id @db.Char(40)
+    name      String
+    Orderable Orderable[]
+}
+
+model Patient {
+    id        String      @id @db.Char(40)
+    name      String
+    Orderable Orderable[]
+    Medicine  Medicine[]
+}
+
+model Medicine {
+    id        String  @id @db.Char(40)
+    name      String
+    patient   Patient @relation(fields: [patientId], references: [id])
+    patientId String
+}
+
+model Orderable {
+    id         String       @id @db.Char(40)
+    name       String
+    Resultable Resultable[]
+    Schedule   Schedule[]
+    Device     Device[]
+
+    patient   Patient @relation(fields: [patientId], references: [id])
+    patientId String
+
+    assignedBy   Doctor @relation(fields: [assignedById], references: [id])
+    assignedById String
+}
+
+model Resultable {
+    id   String @id @db.Char(40)
+    name String
+
+    orderable   Orderable? @relation(fields: [orderableId], references: [id])
+    orderableId String?
+}
+
+model Schedule {
+    id   String   @id @db.Char(40)
+    time DateTime
+
+    orderable   Orderable? @relation(fields: [orderableId], references: [id])
+    orderableId String?
+}
+
+model Device {
+    id    String @id @db.Char(40)
+    model String
+
+    orderable   Orderable? @relation(fields: [orderableId], references: [id])
+    orderableId String?
+}
